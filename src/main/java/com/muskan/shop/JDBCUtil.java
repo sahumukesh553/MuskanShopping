@@ -12,7 +12,7 @@ public class JDBCUtil {
 		 {
 		 try {
 			 Class.forName("com.mysql.cj.jdbc.Driver"); 
-			con=DriverManager.getConnection("jdbc:mysql://muskanshop.cxjdnnmhajbv.ap-south-1.rds.amazonaws.com:3306/muskanshop","mukesh","root7878");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/muskanshop","mukesh","root7878");
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println("can not connect to database");
 		} 
