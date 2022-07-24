@@ -48,7 +48,7 @@ public class UserDataServlet extends HttpServlet {
 				+ "  </div>\r\n"
 				+ "  <div class=\"form-group\">\r\n"
 				+ "    <label for=\"userPic\">profile pic</label>\r\n"
-				+ "    <input type=\"file\" class=\"form-control-file\" id=\"userPic\" name=\"userPic\" required>\r\n"
+				+ "    <input type=\"file\" class=\"form-control-file\" id=\"userPic\" name=\"userPic\">\r\n"
 				+ "  </div>\r\n"
 				+"<div class=\"form-group\">\r\n"
 				+ "    <label for=\"userType\">User Type</label>\r\n"
