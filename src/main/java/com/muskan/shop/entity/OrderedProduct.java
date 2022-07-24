@@ -1,18 +1,24 @@
-package com.muskan.shop.model;
+package com.muskan.shop.entity;
 
 import java.io.InputStream;
 
-public class Product {
+public class OrderedProduct {
 	private int productId ;
 	private String productTitle ;
 	private String productDesc ;
 	private InputStream productPhoto ;
 	private int productPrice ;
-	private int productDiscount ;
+	private int orderId;
 	private int productQuantity ;
 	private int cid ;
 	private String imageData;
 	
+	public int getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
 	public int getProductId() {
 		return productId;
 	}
@@ -43,12 +49,6 @@ public class Product {
 	public void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
 	}
-	public int getProductDiscount() {
-		return productDiscount;
-	}
-	public void setProductDiscount(int productDiscount) {
-		this.productDiscount = productDiscount;
-	}
 	public int getProductQuantity() {
 		return productQuantity;
 	}
@@ -61,18 +61,11 @@ public class Product {
 	public void setCid(int cid) {
 		this.cid = cid;
 	}
-	
 	public String getImageData() {
 		return imageData;
 	}
 	public void setImageData(String imageData) {
 		this.imageData = imageData;
-	}
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", productTitle=" + productTitle + ", productDesc=" + productDesc
-				+ ", productPhoto=" + productPhoto + ", productPrice=" + productPrice + ", productDiscount="
-				+ productDiscount + ", productQuantity=" + productQuantity + ", cid=" + cid + "]";
 	}
 	
 }

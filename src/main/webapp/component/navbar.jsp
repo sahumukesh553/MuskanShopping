@@ -1,8 +1,8 @@
-<%@page import="com.muskan.shop.model.User"%>
-<nav class="navbar navbar-expand-lg navbar-dark nav-bg-color">
+<%@page import="com.muskan.shop.entity.User"%>
+<nav class="navbar navbar-expand-lg navbar-dark nav-bg-color navigation">
  <div class="container">
-  <a class="navbar-brand" href="home">MuskanShopping</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" href="index.html">MuskanShopping</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onclick="mobileMode()">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -25,7 +25,7 @@
    }else{
 	   %>
 	    <li class="nav-item active">
-        <a class="nav-link" href="normal.jsp"> User Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="user"> User Home <span class="sr-only">(current)</span></a>
       </li>
       <% 
    }
@@ -33,7 +33,7 @@
       <li class="nav-item">
         <a class="nav-link" href="about.jsp">About</a>
       </li>
-      <li class="nav-item dropdown">
+     <!--  <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Category
         </a>
@@ -43,7 +43,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
-      </li>
+      </li> -->
    </ul>
    <% if(session.getAttribute("loggedInUser")==null) 
    {
@@ -66,7 +66,7 @@
     	  %>
     	 <ul class="navbar-nav ml-auto">
     	 <li class="nav-item active">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#cart"><i class="fa fa-user" ></i>${loggedInUser.userName}</a>
+        <a class="nav-link" href="profile"><i class="fa fa-user" ></i>${loggedInUser.userName}</a>
           
       </li>
     	 <li class="nav-item active">

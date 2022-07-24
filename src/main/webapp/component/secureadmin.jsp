@@ -1,4 +1,4 @@
-<%@page import="com.muskan.shop.model.User"%>
+<%@page import="com.muskan.shop.entity.User"%>
 <%
 RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
 if(session.getAttribute("loggedInUser")==null) 

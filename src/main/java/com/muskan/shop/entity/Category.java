@@ -1,4 +1,4 @@
-package com.muskan.shop.model;
+package com.muskan.shop.entity;
 
 import java.util.List;
 
@@ -8,6 +8,12 @@ public class Category {
 	private String categoryDescription ;
 	private List<Product> products;
 	
+	public Category(int categoryId, String categoryTitle, String categoryDescription) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryTitle = categoryTitle;
+		this.categoryDescription = categoryDescription;
+	}
 	public Category() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -1,6 +1,6 @@
 <%@include file="component/secureadmin.jsp" %>
 <%@page import="com.muskan.shop.dao.*" %>
-<%@page import="com.muskan.shop.model.*" %>
+<%@page import="com.muskan.shop.entity.*" %>
 <%!  
 CategoryService categoryService=new CategoryService();
 UserService userService=new UserService();
@@ -23,12 +23,13 @@ cursor: pointer;
 </head>
 <body>
 <%@include file="component/navbar.jsp" %>
-<div class="container admin">
+<%@include file="component/Message.jsp" %>
+<div class="container admin main">
 
 <div class="row mt-3">
 
 <div class="col-md-4">
-<div class="card">
+<div class="card" onclick="gotoListItems('user-list.jsp')">
 <div class="card-body">
 <div class="container">
 <img  style="max-width:100px" alt="user-icon" src="images/users.png" class="img-fuild rounded-circle">
@@ -40,7 +41,7 @@ cursor: pointer;
 </div>
 
 <div class="col-md-4">
-<div class="card">
+<div class="card" onclick="gotoListItems('category-list.jsp')">
 <div class="card-body">
 <div class="container">
 <img  style="max-width:100px" alt="categories-icon" src="images/categories.png" class="img-fuild rounded-circle">
@@ -52,10 +53,10 @@ cursor: pointer;
 </div>
 
 <div class="col-md-4">
-<div class="card">
+<div class="card" onclick="gotoListItems('product-list.jsp')">
 <div class="card-body">
 <div class="container">
-<img  style="max-width:100px" alt="products-icon" src="images/products.png" class="img-fuild rounded-circle">
+<img  style="max-width:100px" alt="products-icon" src="images/products.png" class="img-fuild rounded-circle"><a href="product-list.jsp"></a>
 </div>
 <h2><%= productService.getProductCount() %></h2>
 <h1 class="text-uppercase text-muted">products</h1>
@@ -109,11 +110,11 @@ cursor: pointer;
       <form action="addCategory" method="post">
        <div class="form-group">
     <label for="exampleFormControlInput1">Category Title</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Category Title" name="categoryTitle">
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Category Title" name="categoryTitle" required>
   </div>
        <div class="form-group">
   <label for="exampleFormControlTextarea7">Category Description</label>
-    <textarea class="form-control" id="exampleFormControlTextarea7" rows="2" name="categoryDescription"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea7" rows="2" name="categoryDescription" required></textarea>
   </div>
   <button type="submit" class="btn btn-outline-success">Add Category</button>
     <button type="reset" class="btn btn-outline-warning">Reset</button>
@@ -146,23 +147,23 @@ cursor: pointer;
        <form action="addProduct" method="post" enctype="multipart/form-data">
  <div class="form-group">
     <label for="exampleFormControlInput1">Product Title</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Product Title" name="productTitle">
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Product Title" name="productTitle" required>
   </div>
   <div class="form-group">
     <label for="exampleFormControlInput2">Product price</label>
-    <input type="number" class="form-control" id="exampleFormControlInput2" placeholder="Enter Product Price" name="productPrice">
+    <input type="number" class="form-control" id="exampleFormControlInput2" placeholder="Enter Product Price" name="productPrice" required>
   </div>
   <div class="form-group">
     <label for="exampleFormControlInput3">Product Quantity</label>
-    <input type="number" class="form-control" id="exampleFormControlInput3" placeholder="Enter Product Quantity" name="productQuantity">
+    <input type="number" class="form-control" id="exampleFormControlInput3" placeholder="Enter Product Quantity" name="productQuantity" required>
   </div>
   <div class="form-group">
     <label for="exampleFormControlInput4">Product Discount</label>
-    <input type="number" class="form-control" id="exampleFormControlInput4" placeholder="Enter Product Discount" name="productDiscount">
+    <input type="number" class="form-control" id="exampleFormControlInput4" placeholder="Enter Product Discount" name="productDiscount" required>
   </div>
    <div class="form-group">
     <label for="exampleFormControlSelect5">Product Category</label>
-    <select class="form-control" id="exampleFormControlSelect5" name="productCategory">
+    <select class="form-control" id="exampleFormControlSelect5" name="productCategory" required>
       <% for(Category cat:categoryService.getAllCategory())
     	  {
     	  %>
@@ -172,16 +173,15 @@ cursor: pointer;
     	  
     	  }
     	  %>
-    	  
     </select>
   </div>
   <div class="form-group">
     <label for="exampleFormControlFile6">Product Pic</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile6" name="productPhoto">
+    <input type="file" class="form-control-file" id="exampleFormControlFile6" name="productPhoto" required>
   </div>
   <div class="form-group">
   <label for="exampleFormControlTextarea7">Product Description</label>
-    <textarea class="form-control" id="exampleFormControlTextarea7" rows="2" name="productDesc"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea7" rows="2" name="productDesc" required></textarea>
   </div>
   <button type="submit" class="btn btn-outline-success">Add Product</button>
     <button type="reset" class="btn btn-outline-warning">Reset</button>

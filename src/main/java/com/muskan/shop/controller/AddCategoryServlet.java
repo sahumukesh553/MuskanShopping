@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.muskan.shop.dao.CategoryService;
-import com.muskan.shop.model.Category;
+import com.muskan.shop.entity.Category;
 
 @WebServlet("/addCategory")
 public class AddCategoryServlet extends HttpServlet{
@@ -21,9 +21,9 @@ public class AddCategoryServlet extends HttpServlet{
 @Override
 protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	Category category=new Category();
-	category.setCategoryTitle(req.getParameter("categoryTitle"));
+	category.setCategoryTitle(req.getParameter("categoryTitle").trim());
 	
-	category.setCategoryDescription(req.getParameter("categoryDescription"));
+	category.setCategoryDescription(req.getParameter("categoryDescription").trim());
 	System.out.println(category);
 	RequestDispatcher rd=req.getRequestDispatcher("admin.jsp");
 	

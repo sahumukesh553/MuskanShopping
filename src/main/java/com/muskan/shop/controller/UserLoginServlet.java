@@ -13,15 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.muskan.shop.JDBCUtil;
+import com.muskan.shop.dao.CategoryService;
 import com.muskan.shop.dao.UserService;
-import com.muskan.shop.model.User;
+import com.muskan.shop.entity.User;
 public class UserLoginServlet extends HttpServlet {
 	private UserService userService=new UserService();
+	private static  Logger log = Logger.getLogger( UserLoginServlet.class);  
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String email=req.getParameter("userEmail");
-		String password=req.getParameter("userPassword");
+		String email=req.getParameter("userEmail").trim();
+		String password=req.getParameter("userPassword").trim();
 		RequestDispatcher rd=req.getRequestDispatcher("login.jsp");
 		
 		try {
@@ -29,7 +33,7 @@ public class UserLoginServlet extends HttpServlet {
 		if(user!=null)
 		{ 
 		
-		System.out.println("User logged in Successfully "+user);
+		log.info("User logged in Successfully "+user);
 		HttpSession session=req.getSession();
 		session.setAttribute("loggedInUser",user);
 		if(user.getUserType().trim().equalsIgnoreCase("admin"))
@@ -37,7 +41,7 @@ public class UserLoginServlet extends HttpServlet {
 			resp.sendRedirect("admin.jsp");
 		}else
 		{
-			resp.sendRedirect("normal.jsp");
+			resp.sendRedirect("user");
 		}
 		}else {
 			req.setAttribute("message", "No user found with email : "+email);

@@ -7,10 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.muskan.shop.JDBCUtil;
-import com.muskan.shop.model.Category;
+import com.muskan.shop.entity.Category;
 
 public class CategoryService {
+	 static Logger log = Logger.getLogger(CategoryService.class);  
+	
 	public int getCategoryCount()
 	{int count=0;
 		String query="select count(*) from category";
@@ -25,17 +29,15 @@ public class CategoryService {
 			System.out.println("categories "+count);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.debug(e.getMessage());
 		}
 		finally {
 			
 			try {
 				
 				ps.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (SQLException |NullPointerException e) {
+				log.debug(e.getMessage());
 			}
 		}
 		
@@ -47,16 +49,22 @@ public class CategoryService {
 		Connection con=JDBCUtil.getConnection();
 		PreparedStatement ps=null;
 		ps = con.prepareStatement(query);
+		if(ps!=null)
+		{
 		ps.setString(1, category.getCategoryTitle());
 		ps.setString(2,category.getCategoryDescription());
 		ps.executeUpdate();
 		ps.close();
 		}
+		else {
+			log.debug("database connection failed during saving category");
+		}
+		}
 	
 	
 	public List<Category> getAllCategory()
 	{List<Category> ls=null;
-		String query="select categoryId,categoryTitle from category";
+		String query="select * from category";
 		Connection con=JDBCUtil.getConnection();
 		
 		PreparedStatement ps=null;
@@ -66,27 +74,106 @@ public class CategoryService {
 			ls=new ArrayList<Category>();
 			while(rs.next())
 			{
-			ls.add(new Category(rs.getInt(1),rs.getString(2)));
+			ls.add(new Category(rs.getInt("categoryId"),rs.getString("categoryTitle"),rs.getString("categoryDescription")));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.debug(e.getMessage());
 		}
 		finally {
 			
 			try {
 				
 				ps.close();
-			} catch (SQLException e) {
+			} catch (SQLException |NullPointerException e ) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.debug(e.getMessage());
 			}
 		}
 		return ls;
 		
 	}
 	
+	public Category getCategory(int id)
+	{
+		String query="select * from category where categoryId=?";
+		Connection con=JDBCUtil.getConnection();
+		Category cat=null;
+		
+		PreparedStatement ps=null;
+		try {
+			ps = con.prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet rs=ps.executeQuery();
+			
+			if(rs.next())
+			{
+			cat=new Category(rs.getInt("categoryId"),rs.getString("categoryTitle"),rs.getString("categoryDescription"));
+			}
+		} catch (SQLException e) {
+			log.debug(e.getMessage());
+		}
+		finally {
+			
+			try {
+				
+				ps.close();
+			} catch (SQLException |NullPointerException e) {
+				// TODO Auto-generated catch block
+				log.debug(e.getMessage());
+			}
+		}
+		return cat;
+		
+	}
+public void deleteCategory(int categoryId)
+{
+	String query="delete from category where categoryId=?";
+	Connection con=JDBCUtil.getConnection();
+	Category cat=null;
 	
+	PreparedStatement ps=null;
+	try {
+		ps = con.prepareStatement(query);
+		ps.setInt(1, categoryId);
+		ps.executeUpdate();
+		
+		
+	} catch (SQLException e) {
+		log.debug(e.getMessage());
+	}
+	finally {
+		
+		try {
+			
+			ps.close();
+		} catch (SQLException |NullPointerException e ) {
+			// TODO Auto-generated catch block
+			log.debug(e.getMessage());
+		}
+	}
+	
+	
+}
+public boolean updateCategory(Category category) throws SQLException
+{
+	String query="update category set `categoryTitle`=?,`categoryDescription`=? where categoryId=?";
+	Connection con=JDBCUtil.getConnection();
+	PreparedStatement ps=null;
+	
+	boolean result=false;
+	
+	ps = con.prepareStatement(query);
+	if(ps!=null)
+	{
+	ps.setString(1, category.getCategoryTitle());
+	ps.setString(2,category.getCategoryDescription());
+	ps.setInt(3, category.getCategoryId());
+	ps.executeUpdate();
+	result=true;
+	return result;
+	}
 
 
+	return result;
+}
 }

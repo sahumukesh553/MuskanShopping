@@ -1,4 +1,7 @@
 
+<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!-- Cart Modal -->
 <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -19,4 +22,12 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
 <div id="toast"> This is our custom Toast Text</div>

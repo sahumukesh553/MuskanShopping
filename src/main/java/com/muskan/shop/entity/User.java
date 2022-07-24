@@ -1,4 +1,8 @@
-package com.muskan.shop.model;
+package com.muskan.shop.entity;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Base64;
 
 public class User {
 	private int userId;
@@ -7,15 +11,25 @@ public class User {
 	private String userPassword;
 	private String userPhone;
 	private String userPic;
+	private InputStream userPhoto;
 	private String userAddress; 
 	private String userType;
 	
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", userPassword="
-				+ userPassword + ", userPhone=" + userPhone + ", userPic=" + userPic + ", userAddress=" + userAddress
-				+ ", userType=" + userType + "]";
+		return "{userId : "+userId + ", userName : " + userName + ", userEmail : " + userEmail + ", userPassword : "
+				+ userPassword + ", userPhone :" + userPhone + ", userAddress : " + userAddress
+				+ ", userType : " + userType + "}";
 	}
+	
+	public InputStream getUserPhoto() {
+		return userPhoto;
+	}
+
+	public void setUserPhoto(InputStream userPhoto) {
+		this.userPhoto = userPhoto;
+	}
+
 	public int getUserId() {
 		return userId;
 	}
@@ -47,7 +61,9 @@ public class User {
 		this.userPhone = userPhone;
 	}
 	public String getUserPic() {
+		
 		return userPic;
+		
 	}
 	public void setUserPic(String userPic) {
 		this.userPic = userPic;
